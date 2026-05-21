@@ -19,8 +19,8 @@
 *{box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;display:flex;flex-direction:column;min-height:100vh}
 .header-bar{display:flex;align-items:stretch;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.header-logo{width:var(--side-w);background:#fefefe;display:flex;align-items:center;justify-content:center;padding:10px 16px;flex-shrink:0}
-.header-logo img{height:42px;object-fit:contain;width:100%}
+.header-logo{width:var(--side-w);background:#fefefe;display:flex;align-items:center;justify-content:center;padding:8px 12px;flex-shrink:0}
+.header-logo svg{height:46px;width:auto;display:block}
 .header-title{flex:1;background:#E4002B;color:#fff;display:flex;align-items:center;justify-content:center;padding:14px 24px}
 .header-title h2{margin:0;font-size:16px;letter-spacing:.5px}
 .app-body{display:flex;flex:1}
@@ -44,9 +44,12 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .f-item{display:flex;flex-direction:row;align-items:center;gap:4px;position:relative}
 .f-item label{font-size:8px;font-weight:700;color:#666;white-space:nowrap}
 .multiselect{padding:1px 5px;border-radius:3px;border:1px solid #ccc;font-size:9px;height:20px;cursor:pointer;background:#fff;min-width:90px;max-width:140px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.dropdown-content{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #ccc;z-index:200;max-height:220px;overflow-y:auto;box-shadow:0 4px 8px rgba(0,0,0,.12);padding:4px;min-width:160px;border-radius:3px}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #ccc;z-index:200;max-height:240px;overflow-y:auto;box-shadow:0 4px 8px rgba(0,0,0,.12);padding:4px;min-width:170px;border-radius:3px}
 .dropdown-content label{display:flex;align-items:center;gap:6px;padding:4px 5px;cursor:pointer;font-weight:400;font-size:10px;color:#333;white-space:nowrap}
 .dropdown-content.open{display:block}
+.dropdown-toolbar{display:flex;gap:4px;padding:2px 4px 4px;border-bottom:1px solid #eee;margin-bottom:2px}
+.dropdown-toolbar button{flex:1;font-size:9px;padding:2px 4px;border:1px solid #ccc;background:#f4f4f4;border-radius:3px;cursor:pointer;font-weight:600}
+.dropdown-toolbar button:hover{background:#e8e8e8}
 .btn-clear{background:var(--rojo);color:#fff;border:none;padding:2px 10px;cursor:pointer;border-radius:3px;font-size:9px;font-weight:700;height:20px}
 .kpi-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
 .kpi-card{flex:1;background:#f9f9f9;border:1px solid #e8e8e8;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06);min-height:90px;text-align:center;min-width:140px}
@@ -64,20 +67,29 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .tabla-toolbar{display:flex;align-items:center;justify-content:space-between;background:#333F48;color:#fff;padding:8px 14px;font-size:11px;font-weight:700}
 .btn-dl{background:#00882B;color:#fff;border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700}
 .btn-dl:hover{background:#006820}
-.tabla-scroll{overflow-x:auto;max-height:420px;overflow-y:auto}
+.tabla-scroll{overflow-x:auto}
+.tabla-scroll.with-vscroll{max-height:420px;overflow-y:auto}
 .tbl{width:100%;border-collapse:collapse;font-size:11px;font-family:'Segoe UI',sans-serif}
 .tbl thead th{background:#333F48;color:#fff;padding:6px 10px;text-align:center;white-space:nowrap;font-size:10px;position:sticky;top:0;z-index:2;border-right:1px solid #4a5a68}
 .tbl tbody td{padding:5px 10px;border-bottom:1px solid #eee;border-right:1px solid #eee;text-align:center;white-space:nowrap}
 .tbl tbody tr:hover td{background:#edf3ff}
 .tbl tbody td.txt-left{text-align:left}
-.tbl .row-critico{background:rgba(192,0,0,.08)}
+.tbl tbody tr.subtotal-zona td{background:#E4002B;color:#fff;font-weight:800;cursor:pointer}
+.tbl tbody tr.subtotal-zona td:first-child::before{content:'▼ ';font-size:9px}
+.tbl tbody tr.subtotal-zona.collapsed td:first-child::before{content:'▶ '}
+.tbl tbody tr.subtotal-subzona td{background:#FBD8DE;color:#7a0014;font-weight:700;cursor:pointer}
+.tbl tbody tr.subtotal-subzona td:first-child::before{content:'▼ ';font-size:9px;padding-left:14px}
+.tbl tbody tr.subtotal-subzona.collapsed td:first-child::before{content:'▶ ';padding-left:14px}
+.tbl tbody tr.subtotal-subzona td:first-child{padding-left:24px}
+.tbl tbody tr.detalle-fila td:first-child{padding-left:34px}
+.tbl tbody tr.subtotal-grand td{background:#1a242b;color:#fff;font-weight:800;font-size:11px}
+.tbl tbody tr.hidden{display:none}
 .vista{display:none}
 .vista.active{display:block}
 .kpi-card .kpi-value.danger{color:#C00000}
 .kpi-card .kpi-value.ok{color:#00AF50}
-.kpi-card .kpi-value.warn{color:#FFA500}
 .section-title{font-size:13px;font-weight:700;color:#333F48;margin:18px 0 8px 2px;padding-bottom:4px;border-bottom:2px solid #E4002B;display:inline-block}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media (max-width:980px){.grid-2{grid-template-columns:1fr}}
 .pct-bar{display:inline-block;height:6px;background:#eee;border-radius:3px;width:60px;vertical-align:middle;margin-left:4px;position:relative;overflow:hidden}
 .pct-bar i{position:absolute;left:0;top:0;height:100%}
@@ -87,13 +99,29 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .cell-danger{color:#C00000;font-weight:700}
 .cell-ok{color:#00AF50;font-weight:700}
 .cell-warn{color:#FFC000;font-weight:700}
+.mini-card-row{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+.mini-tabla{flex:0 0 auto;min-width:260px}
 </style>
 </head>
 <body>
 
 <div class="header-bar">
   <div class="header-logo">
-    <div style="font-weight:800;color:#E4002B;font-size:14px;letter-spacing:.5px">SENDA&nbsp;CITI</div>
+    <!-- Logo SENDA CITI (SVG inline para que sea standalone) -->
+    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-label="SENDA CITI">
+      <!-- Marca SENDA -->
+      <text x="0" y="28" font-family="Arial Black, Arial, sans-serif" font-size="26" font-weight="900" fill="#E4002B" letter-spacing="1">SENDA</text>
+      <!-- Línea separadora roja -->
+      <rect x="0" y="33" width="200" height="2" fill="#E4002B"/>
+      <!-- Marca CITI -->
+      <text x="0" y="54" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#333F48" letter-spacing="6">CITI</text>
+      <!-- Icono de ciudad/ruta -->
+      <g transform="translate(135,38)">
+        <circle cx="0" cy="0" r="3" fill="#E4002B"/>
+        <path d="M0,0 Q10,-8 20,0 T40,0" stroke="#E4002B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="40" cy="0" r="3" fill="#E4002B"/>
+      </g>
+    </svg>
   </div>
   <div class="header-title">
     <h2>VENCIMIENTO DE ORDENES DE MANTENIMIENTO</h2>
@@ -132,7 +160,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 
         <!-- ── FILTROS (3 filas) ───────────────────────────────────── -->
         <div class="filters-wrap">
-          <!-- Fila 1: ZONA / SUBZONA / DIVISION -->
           <div class="filters-row">
             <div class="f-item">
               <label>ZONA</label>
@@ -151,7 +178,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
             </div>
             <button class="btn-clear" onclick="resetAll()">LIMPIAR FILTROS</button>
           </div>
-          <!-- Fila 2 -->
           <div class="filters-row">
             <div class="f-item">
               <label>DESCRIPCION MTTO</label>
@@ -184,7 +210,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
               <div class="dropdown-content" id="optsDIFERENCIAS"></div>
             </div>
           </div>
-          <!-- Fila 3 -->
           <div class="filters-row">
             <div class="f-item">
               <label>TIPO VEHICULO</label>
@@ -232,7 +257,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
         <!-- ════════════ VISTA 1: GRAFICA DE VENCIMIENTOS ════════════ -->
         <div class="vista active" id="vista1">
 
-          <!-- KPI Cards -->
           <div class="kpi-row">
             <div class="kpi-card">
               <div class="kpi-label">ORDENES MAYOR 110%</div>
@@ -256,12 +280,12 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
             </div>
             <div class="kpi-card">
               <div class="kpi-label">DIVISIÓN + MAYOR 110%</div>
-              <div class="kpi-value" id="kpiV5" style="font-size:16px">—</div>
+              <div class="kpi-value danger" id="kpiV5" style="font-size:16px">—</div>
               <div class="kpi-sub" id="kpiV5Sub"></div>
             </div>
             <div class="kpi-card">
-              <div class="kpi-label">DIVISIÓN - MAYOR 110%</div>
-              <div class="kpi-value" id="kpiV6" style="font-size:16px">—</div>
+              <div class="kpi-label">MEJOR DIVISIÓN MENOR 110%</div>
+              <div class="kpi-value ok" id="kpiV6" style="font-size:16px">—</div>
               <div class="kpi-sub" id="kpiV6Sub"></div>
             </div>
           </div>
@@ -276,13 +300,29 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
             <canvas id="myChart"></canvas>
           </div>
 
-          <!-- Tabla MAYOR 110% -->
+          <!-- NUEVA: Tabla resumen por grupos (datos de la gráfica) -->
+          <div class="tabla-wrap">
+            <div class="tabla-toolbar">
+              <span>Resumen de Ordenes por Grupos</span>
+              <button class="btn-dl" onclick="descargarTabla('tblGrupos','ordenes_por_grupos')">&#11015; Descargar Excel</button>
+            </div>
+            <div class="tabla-scroll">
+              <table class="tbl" id="tblGrupos">
+                <thead>
+                  <tr><th>GRUPO</th><th>CANTIDAD DE ORDENES</th><th>% DEL TOTAL</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tabla detalle MAYOR 110% -->
           <div class="tabla-wrap">
             <div class="tabla-toolbar">
               <span id="tblTitulo">Ordenes con vencimiento MAYOR 110%</span>
               <button class="btn-dl" onclick="descargarExcelDetalle()">&#11015; Descargar Excel</button>
             </div>
-            <div class="tabla-scroll">
+            <div class="tabla-scroll with-vscroll">
               <table class="tbl" id="tblDetalle">
                 <thead>
                   <tr>
@@ -305,17 +345,35 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
         <!-- ════════════ VISTA 2: TABLAS KPIS ════════════ -->
         <div class="vista" id="vista2">
 
+          <!-- Mini tarjeta de unidades únicas MAYOR 110% -->
+          <div class="mini-card-row">
+            <div class="tabla-wrap mini-tabla">
+              <div class="tabla-toolbar">
+                <span>Unidades únicas con MAYOR 110%</span>
+                <button class="btn-dl" onclick="descargarTabla('tblUnidUni','unidades_unicas_mayor110')">&#11015; Excel</button>
+              </div>
+              <div class="tabla-scroll">
+                <table class="tbl" id="tblUnidUni">
+                  <thead>
+                    <tr><th>CONCEPTO</th><th>VALOR</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
           <div class="section-title">% Mayor / Menor 110% por Zona, Subzona y División</div>
           <div class="tabla-wrap">
             <div class="tabla-toolbar">
-              <span>Distribución por ubicación</span>
+              <span>Distribución por ubicación (clic en filas rojas/rosas para colapsar)</span>
               <button class="btn-dl" onclick="descargarTabla('tblZonaSub','distribucion_zona_subzona_division')">&#11015; Descargar Excel</button>
             </div>
             <div class="tabla-scroll">
               <table class="tbl" id="tblZonaSub">
                 <thead>
                   <tr>
-                    <th>ZONA</th><th>SUBZONA</th><th>DIVISION</th>
+                    <th>ZONA / SUBZONA / DIVISION</th>
                     <th>TOTAL ORDENES</th>
                     <th>MAYOR 110%</th><th>% MAYOR 110%</th>
                     <th>MENOR 110%</th><th>% MENOR 110%</th>
@@ -327,21 +385,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
           </div>
 
           <div class="grid-2">
-            <div>
-              <div class="section-title">Ordenes MAYOR 110% por División y DESCRIP ESTAUS</div>
-              <div class="tabla-wrap">
-                <div class="tabla-toolbar">
-                  <span>División × Descrip Estaus</span>
-                  <button class="btn-dl" onclick="descargarTabla('tblDivEstaus','division_descrip_estaus')">&#11015; Descargar Excel</button>
-                </div>
-                <div class="tabla-scroll">
-                  <table class="tbl" id="tblDivEstaus">
-                    <thead id="tblDivEstausHead"></thead>
-                    <tbody id="tblDivEstausBody"></tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <!-- IZQUIERDA: Ahora va "Ordenes MAYOR 110% por División" primero -->
             <div>
               <div class="section-title">Ordenes MAYOR 110% por División</div>
               <div class="tabla-wrap">
@@ -352,7 +396,25 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
                 <div class="tabla-scroll">
                   <table class="tbl" id="tblDiv">
                     <thead>
-                      <tr><th>DIVISION</th><th>ORDENES MAYOR 110%</th><th>% del total MAYOR</th></tr>
+                      <tr><th>DIVISION</th><th>ORDENES MAYOR 110%</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- DERECHA: "División y DESCRIP ESTAUS" formato long -->
+            <div>
+              <div class="section-title">Ordenes MAYOR 110% por División y DESCRIP ESTAUS</div>
+              <div class="tabla-wrap">
+                <div class="tabla-toolbar">
+                  <span>División × Descrip Estaus (formato detalle)</span>
+                  <button class="btn-dl" onclick="descargarTabla('tblDivEstaus','division_descrip_estaus')">&#11015; Descargar Excel</button>
+                </div>
+                <div class="tabla-scroll">
+                  <table class="tbl" id="tblDivEstaus">
+                    <thead>
+                      <tr><th>DIVISION</th><th>DESCRIP ESTAUS</th><th>ORDENES MAYOR 110%</th></tr>
                     </thead>
                     <tbody></tbody>
                   </table>
@@ -367,7 +429,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
               <span>Tipo de Mantenimiento</span>
               <button class="btn-dl" onclick="descargarTabla('tblTipoMtto','tipo_mantenimiento_unidades')">&#11015; Descargar Excel</button>
             </div>
-            <div class="tabla-scroll">
+            <div class="tabla-scroll with-vscroll">
               <table class="tbl" id="tblTipoMtto">
                 <thead>
                   <tr>
@@ -405,23 +467,17 @@ const FILTER_FIELDS = [
   'MARCA MOTOR','TIPO MOTOR','TIPO COMBUSTIBLE'
 ];
 
-// Orden y colores de los grupos para la gráfica
+// Default: filtro ESTATUS excluye estos valores
+const ESTATUS_EXCLUIR_DEFAULT = ['BAJA TALLER','INACTIVA','PROPUESTA BAJA'];
+
 const GRUPOS_ORDEN = [
   '0%-22%','22%-44%','44%-66%','66%-88%','88%-110%',
   '110%-132%','132%-154%','154%-176%','176%-198%','198%-220%','221% o Mas'
 ];
 const GRUPOS_COLOR = {
-  '0%-22%':    '#00AF50',
-  '22%-44%':   '#00AF50',
-  '44%-66%':   '#00AF50',
-  '66%-88%':   '#00AF50',
-  '88%-110%':  '#00AF50',
-  '110%-132%': '#FFC000',
-  '132%-154%': '#C00000',
-  '154%-176%': '#C00000',
-  '176%-198%': '#C00000',
-  '198%-220%': '#C00000',
-  '221% o Mas':'#C00000'
+  '0%-22%':'#00AF50','22%-44%':'#00AF50','44%-66%':'#00AF50','66%-88%':'#00AF50','88%-110%':'#00AF50',
+  '110%-132%':'#FFC000',
+  '132%-154%':'#C00000','154%-176%':'#C00000','176%-198%':'#C00000','198%-220%':'#C00000','221% o Mas':'#C00000'
 };
 
 // ── Estado global ────────────────────────────────────────────────────
@@ -429,6 +485,7 @@ let rawData = [], myChart = null, renderTimer = null;
 let vistaActual = 1;
 let filters = Object.fromEntries(FILTER_FIELDS.map(f=>[f,[]]));
 let filteredCache = [];
+let defaultsApplied = false;
 
 const $ = id => document.getElementById(id);
 
@@ -446,9 +503,8 @@ function cambiarVista(n) {
   render();
 }
 
-// ── Dropdowns ────────────────────────────────────────────────────────
 document.addEventListener('click', e => {
-  if(e.target.type==='checkbox'||e.target.tagName==='LABEL') return;
+  if(e.target.type==='checkbox'||e.target.tagName==='LABEL'||e.target.tagName==='BUTTON') return;
   const inside=e.target.closest('.f-item');
   document.querySelectorAll('.dropdown-content').forEach(d=>{
     if(!inside||!inside.contains(d)) d.classList.remove('open');
@@ -463,6 +519,7 @@ function procesarExcel(buf) {
   $('mainUI').style.display='block';
   $('uploadArea').style.display='none';
   buildFilters();
+  aplicarDefaults();
   bindMultiselects();
   render();
 }
@@ -498,20 +555,60 @@ function buildFilters() {
     const cont=$('opts'+field);
     if(!cont) return;
     let opts=[...new Set(rawData.map(d=>d[field]))].filter(v=>v!==undefined && v!==null && v!=='');
-    // Orden especial para GRUPOS
     if(field==='GRUPOS') opts.sort((a,b)=>GRUPOS_ORDEN.indexOf(a)-GRUPOS_ORDEN.indexOf(b));
     else opts.sort((a,b)=>String(a).localeCompare(String(b),'es',{numeric:true}));
-    cont.innerHTML=opts.map(o=>
+    // Toolbar Todos / Ninguno
+    const tb = `<div class="dropdown-toolbar">
+        <button type="button" onclick="msSelAll('${field.replace(/'/g,"\\'")}')">Todos</button>
+        <button type="button" onclick="msSelNone('${field.replace(/'/g,"\\'")}')">Ninguno</button>
+      </div>`;
+    cont.innerHTML = tb + opts.map(o=>
       `<label><input type="checkbox" value="${String(o).replace(/"/g,'&quot;')}" onclick="handleFilterChange('${field.replace(/'/g,"\\'")}')"> ${o}</label>`
     ).join('');
   });
+}
+
+function aplicarDefaults(){
+  if(defaultsApplied) return;
+  defaultsApplied = true;
+  // Por defecto seleccionar todos los ESTATUS excepto los excluidos
+  const todosEstatus = [...new Set(rawData.map(d=>d['ESTATUS']))].filter(v=>v!==undefined && v!==null && v!=='');
+  const seleccionados = todosEstatus.filter(v => !ESTATUS_EXCLUIR_DEFAULT.includes(String(v)));
+  filters['ESTATUS'] = seleccionados.map(String);
+  // Marcar checkboxes
+  const cont = $('optsESTATUS');
+  if(cont){
+    cont.querySelectorAll('input').forEach(cb=>{
+      cb.checked = !ESTATUS_EXCLUIR_DEFAULT.includes(cb.value);
+    });
+  }
+  $('msESTATUS').innerText = seleccionados.length===todosEstatus.length
+    ? 'Todos...'
+    : (seleccionados.length<=3 ? seleccionados.join(', ') : `${seleccionados.length} seleccionados`);
+}
+
+function msSelAll(field){
+  const cont=$('opts'+field);
+  if(!cont) return;
+  cont.querySelectorAll('input').forEach(cb=>cb.checked=true);
+  handleFilterChange(field);
+}
+function msSelNone(field){
+  const cont=$('opts'+field);
+  if(!cont) return;
+  cont.querySelectorAll('input').forEach(cb=>cb.checked=false);
+  handleFilterChange(field);
 }
 
 function handleFilterChange(field) {
   if(field) {
     const cont=$('opts'+field);
     if(cont) filters[field]=Array.from(cont.querySelectorAll('input:checked')).map(i=>i.value);
-    $('ms'+field).innerText=filters[field].length?filters[field].join(', '):'Todos...';
+    const totalOpts = cont ? cont.querySelectorAll('input').length : 0;
+    if(filters[field].length===0) $('ms'+field).innerText = 'Todos...';
+    else if(filters[field].length===totalOpts) $('ms'+field).innerText = 'Todos...';
+    else if(filters[field].length<=3) $('ms'+field).innerText = filters[field].join(', ');
+    else $('ms'+field).innerText = `${filters[field].length} seleccionados`;
   }
   clearTimeout(renderTimer); renderTimer=setTimeout(render,60);
 }
@@ -523,6 +620,9 @@ function resetAll() {
     if(cont) cont.querySelectorAll('input').forEach(cb=>cb.checked=false);
     if($('ms'+f)) $('ms'+f).innerText='Todos...';
   });
+  // Reaplicar default de ESTATUS
+  defaultsApplied = false;
+  aplicarDefaults();
   render();
 }
 
@@ -530,20 +630,21 @@ function resetAll() {
 function applyFilters() {
   return rawData.filter(d=>{
     for(const f of FILTER_FIELDS){
-      if(filters[f].length && !filters[f].includes(String(d[f]))) return false;
+      if(filters[f].length){
+        // Si seleccionó todas las opciones, no filtra
+        const totalOpts = $('opts'+f) ? $('opts'+f).querySelectorAll('input').length : 0;
+        if(filters[f].length===totalOpts) continue;
+        if(!filters[f].includes(String(d[f]))) return false;
+      }
     }
     return true;
   });
 }
 
-// ── Render principal ─────────────────────────────────────────────────
 function render() {
   filteredCache = applyFilters();
-  if(vistaActual===1){
-    renderVista1();
-  } else {
-    renderVista2();
-  }
+  if(vistaActual===1) renderVista1();
+  else renderVista2();
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -552,7 +653,6 @@ function render() {
 function renderVista1(){
   const data = filteredCache;
 
-  // KPIs
   const total = data.length;
   const mayor = data.filter(d=>d['DIFERENCIAS']==='MAYOR 110%').length;
   const menor = data.filter(d=>d['DIFERENCIAS']==='MENOR 110%').length;
@@ -566,28 +666,42 @@ function renderVista1(){
   $('kpiV4').textContent = pctMenor.toFixed(1)+'%';
   $('kpiV4Sub').textContent = `de ${total.toLocaleString('es-MX')} órdenes`;
 
-  // División con más / menos MAYOR 110%
-  const divCount = {};
+  // División con MÁS órdenes MAYOR 110% (cantidad absoluta)
+  const divMayor = {};
   data.forEach(d=>{
     if(d['DIFERENCIAS']==='MAYOR 110%'){
       const k=d['DIVISION']||'(s/d)';
-      divCount[k]=(divCount[k]||0)+1;
+      divMayor[k]=(divMayor[k]||0)+1;
     }
   });
-  const divEntries = Object.entries(divCount);
-  if(divEntries.length>0){
-    divEntries.sort((a,b)=>b[1]-a[1]);
-    const max = divEntries[0], min = divEntries[divEntries.length-1];
-    $('kpiV5').textContent = max[0];
-    $('kpiV5Sub').textContent = max[1].toLocaleString('es-MX')+' órdenes';
-    $('kpiV6').textContent = min[0];
-    $('kpiV6Sub').textContent = min[1].toLocaleString('es-MX')+' órdenes';
-  } else {
-    $('kpiV5').textContent='—'; $('kpiV5Sub').textContent='';
-    $('kpiV6').textContent='—'; $('kpiV6Sub').textContent='';
-  }
+  const arrMayor = Object.entries(divMayor).sort((a,b)=>b[1]-a[1]);
+  if(arrMayor.length>0){
+    $('kpiV5').textContent = arrMayor[0][0];
+    $('kpiV5Sub').textContent = arrMayor[0][1].toLocaleString('es-MX')+' órdenes MAYOR 110%';
+  } else { $('kpiV5').textContent='—'; $('kpiV5Sub').textContent=''; }
 
-  // Gráfica: conteo por GRUPOS
+  // MEJOR división MENOR 110% = la que tiene MAYOR cantidad de órdenes MENOR 110%
+  // (interpretación: la división con mayor % MENOR 110% sobre su total)
+  // Cumple la regla "mejor división con MENOR 110%" → mayor % al corriente
+  const divStats = {};
+  data.forEach(d=>{
+    const k=d['DIVISION']||'(s/d)';
+    if(!divStats[k]) divStats[k]={total:0,men:0,may:0};
+    divStats[k].total++;
+    if(d['DIFERENCIAS']==='MENOR 110%') divStats[k].men++;
+    else if(d['DIFERENCIAS']==='MAYOR 110%') divStats[k].may++;
+  });
+  const arrMenor = Object.entries(divStats)
+    .filter(([k,v])=>v.total>=10)  // umbral mínimo para que sea representativo
+    .map(([k,v])=>({div:k, pct: v.total>0?v.men/v.total*100:0, men:v.men, total:v.total}))
+    .sort((a,b)=>b.pct-a.pct);
+  if(arrMenor.length>0){
+    const best = arrMenor[0];
+    $('kpiV6').textContent = best.div;
+    $('kpiV6Sub').textContent = `${best.pct.toFixed(1)}% al corriente (${best.men.toLocaleString('es-MX')}/${best.total.toLocaleString('es-MX')})`;
+  } else { $('kpiV6').textContent='—'; $('kpiV6Sub').textContent=''; }
+
+  // Gráfica
   const counts = {};
   GRUPOS_ORDEN.forEach(g=>counts[g]=0);
   data.forEach(d=>{
@@ -596,18 +710,15 @@ function renderVista1(){
       counts[g]++;
     }
   });
-
   const labels = GRUPOS_ORDEN;
   const valores = labels.map(l=>counts[l]);
   const colores = labels.map(l=>GRUPOS_COLOR[l]);
   const yMax = Math.max(...valores, 1);
 
-  // Título dinámico
   const zonaSel = filters['ZONA']?.length ? filters['ZONA'].join(', ') : 'Todas las zonas';
   $('ctZone').textContent = zonaSel;
   $('ctInfo').textContent = `${total.toLocaleString('es-MX')} órdenes filtradas`;
 
-  // Render Chart.js
   if(myChart){ myChart.destroy(); myChart=null; }
   const cont=document.querySelector('.chart-container');
   const old=$('myChart'); if(old) old.remove();
@@ -629,16 +740,14 @@ function renderVista1(){
       responsive:true, maintainAspectRatio:false,
       scales:{
         x:{ ticks:{minRotation:0,font:{size:10,weight:'600'}}, grid:{display:false} },
-        y:{ beginAtZero:true, max:Math.ceil(yMax*1.15), grid:{color:'#eee'},
+        y:{ beginAtZero:true, max:Math.ceil(yMax*1.15),
+            grid:{display:false},
+            border:{display:false},
             ticks:{font:{size:10}, callback:v=>v.toLocaleString('es-MX')} }
       },
       plugins:{
         legend:{display:false},
-        tooltip:{
-          callbacks:{
-            label:ctx=>'Órdenes: '+ctx.parsed.y.toLocaleString('es-MX')
-          }
-        }
+        tooltip:{ callbacks:{ label:ctx=>'Órdenes: '+ctx.parsed.y.toLocaleString('es-MX') } }
       }
     },
     plugins:[{
@@ -657,17 +766,29 @@ function renderVista1(){
     }]
   });
 
-  // Tabla detalle MAYOR 110%
+  // Tabla resumen por grupos
+  const tbodyG = document.querySelector('#tblGrupos tbody');
+  let rowsG = labels.map((g,i)=>{
+    const v = valores[i];
+    const pct = total>0 ? (v/total*100) : 0;
+    return `<tr>
+      <td class="txt-left" style="border-left:4px solid ${colores[i]}">${g}</td>
+      <td class="cell-num">${v.toLocaleString('es-MX')}</td>
+      <td>${pct.toFixed(1)}%</td>
+    </tr>`;
+  }).join('');
+  const totG = valores.reduce((a,b)=>a+b,0);
+  rowsG += `<tr class="subtotal-grand"><td class="txt-left">TOTAL</td><td>${totG.toLocaleString('es-MX')}</td><td>100.0%</td></tr>`;
+  tbodyG.innerHTML = rowsG;
+
   buildTablaDetalle(data);
 }
 
 function buildTablaDetalle(data){
   const body=$('tblDetalleBody');
   const may = data.filter(d=>d['DIFERENCIAS']==='MAYOR 110%');
-  // ordenar desc por % VENCIMIENTO
   may.sort((a,b)=> (Number(b['% VENCIMIENTO'])||0) - (Number(a['% VENCIMIENTO'])||0) );
 
-  // Cap visual: render máx 2000 filas para no congelar el navegador; descarga sí lleva todas
   const cap = 2000;
   const slice = may.slice(0,cap);
   const fmtPct = v=>{
@@ -678,7 +799,6 @@ function buildTablaDetalle(data){
     const pct = Number(d['% VENCIMIENTO'])||0;
     let cls='cell-warn';
     if(pct*100>=132) cls='cell-danger';
-    else if(pct*100>=110) cls='cell-warn';
     return `<tr>
       <td>${d['ORDEN']??''}</td>
       <td>${d['DIVISION']??''}</td>
@@ -690,10 +810,9 @@ function buildTablaDetalle(data){
     </tr>`;
   }).join('');
 
-  // Footer info
   const tit = $('tblTitulo');
   if(may.length>cap){
-    tit.textContent = `Ordenes con vencimiento MAYOR 110% — mostrando ${cap.toLocaleString('es-MX')} de ${may.length.toLocaleString('es-MX')} (la descarga incluye todas)`;
+    tit.textContent = `Ordenes MAYOR 110% — mostrando ${cap.toLocaleString('es-MX')} de ${may.length.toLocaleString('es-MX')} (descarga incluye todas)`;
   } else {
     tit.textContent = `Ordenes con vencimiento MAYOR 110% — ${may.length.toLocaleString('es-MX')} registros`;
   }
@@ -712,15 +831,16 @@ function descargarExcelDetalle(){
     'DESCRIP ESTAUS': d['DESCRIP ESTAUS']??''
   }));
   const ws = XLSX.utils.json_to_sheet(rows);
-  // formato porcentaje col F (% VENCIMIENTO)
-  const range = XLSX.utils.decode_range(ws['!ref']);
-  for(let r=1; r<=range.e.r; r++){
-    const cell = ws[XLSX.utils.encode_cell({r,c:5})];
-    if(cell) cell.z = '0.0%';
+  if(ws['!ref']){
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for(let r=1; r<=range.e.r; r++){
+      const cell = ws[XLSX.utils.encode_cell({r,c:5})];
+      if(cell) cell.z = '0.0%';
+    }
   }
   ws['!cols'] = [{wch:12},{wch:18},{wch:10},{wch:14},{wch:38},{wch:14},{wch:22}];
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'MAYOR 110%');
+  XLSX.utils.book_append_sheet(wb, ws, 'MAYOR 110');
   XLSX.writeFile(wb, 'ordenes_mayor_110.xlsx');
 }
 
@@ -730,69 +850,134 @@ function descargarExcelDetalle(){
 function renderVista2(){
   const data = filteredCache;
 
-  // --- Tabla 1: Zona / Subzona / División ---
-  const map1 = {};
+  // --- Mini: unidades únicas MAYOR 110% ---
+  const unidUni = new Set();
   data.forEach(d=>{
-    const k=[d['ZONA']||'(s/d)', d['SUBZONA']||'(s/d)', d['DIVISION']||'(s/d)'].join('||');
-    if(!map1[k]) map1[k]={zona:d['ZONA']||'',sub:d['SUBZONA']||'',div:d['DIVISION']||'',total:0,may:0,men:0};
-    map1[k].total++;
-    if(d['DIFERENCIAS']==='MAYOR 110%') map1[k].may++;
-    else if(d['DIFERENCIAS']==='MENOR 110%') map1[k].men++;
+    if(d['DIFERENCIAS']==='MAYOR 110%' && d['UNIDAD']!==undefined && d['UNIDAD']!==null && d['UNIDAD']!==''){
+      unidUni.add(String(d['UNIDAD']));
+    }
   });
-  const rows1 = Object.values(map1).sort((a,b)=>{
-    if(a.zona!==b.zona) return a.zona.localeCompare(b.zona);
-    if(a.sub!==b.sub) return a.sub.localeCompare(b.sub);
-    return a.div.localeCompare(b.div);
+  const totalUnidUni = new Set();
+  data.forEach(d=>{
+    if(d['UNIDAD']!==undefined && d['UNIDAD']!==null && d['UNIDAD']!=='') totalUnidUni.add(String(d['UNIDAD']));
   });
+  const pctUnid = totalUnidUni.size>0 ? (unidUni.size/totalUnidUni.size*100) : 0;
+  document.querySelector('#tblUnidUni tbody').innerHTML = `
+    <tr><td class="txt-left">Unidades únicas con al menos 1 orden MAYOR 110%</td><td class="cell-danger" style="font-size:14px">${unidUni.size.toLocaleString('es-MX')}</td></tr>
+    <tr><td class="txt-left">Total de unidades únicas (en el filtro)</td><td class="cell-num">${totalUnidUni.size.toLocaleString('es-MX')}</td></tr>
+    <tr><td class="txt-left">% de unidades con vencimiento MAYOR 110%</td><td class="cell-danger">${pctUnid.toFixed(1)}%</td></tr>
+  `;
+
+  // --- Tabla 1: Zona / Subzona / División con subtotales colapsables ---
+  const tree = {}; // tree[zona][subzona][div] = {total,may,men}
+  data.forEach(d=>{
+    const z = d['ZONA']||'(s/d)';
+    const s = d['SUBZONA']||'(s/d)';
+    const dv= d['DIVISION']||'(s/d)';
+    if(!tree[z]) tree[z]={};
+    if(!tree[z][s]) tree[z][s]={};
+    if(!tree[z][s][dv]) tree[z][s][dv]={total:0,may:0,men:0};
+    tree[z][s][dv].total++;
+    if(d['DIFERENCIAS']==='MAYOR 110%') tree[z][s][dv].may++;
+    else if(d['DIFERENCIAS']==='MENOR 110%') tree[z][s][dv].men++;
+  });
+
   const tbody1 = document.querySelector('#tblZonaSub tbody');
-  tbody1.innerHTML = rows1.map(r=>{
-    const pmay = r.total>0 ? (r.may/r.total*100) : 0;
-    const pmen = r.total>0 ? (r.men/r.total*100) : 0;
-    return `<tr>
-      <td class="txt-left">${r.zona}</td>
-      <td class="txt-left">${r.sub}</td>
-      <td class="txt-left">${r.div}</td>
-      <td class="cell-num">${r.total.toLocaleString('es-MX')}</td>
-      <td class="cell-danger">${r.may.toLocaleString('es-MX')}</td>
-      <td class="cell-danger">${pmay.toFixed(1)}% <span class="pct-bar"><i class="danger" style="width:${Math.min(100,pmay)}%"></i></span></td>
-      <td class="cell-ok">${r.men.toLocaleString('es-MX')}</td>
-      <td class="cell-ok">${pmen.toFixed(1)}% <span class="pct-bar"><i class="ok" style="width:${Math.min(100,pmen)}%"></i></span></td>
-    </tr>`;
-  }).join('');
-
-  // --- Tabla 2: División x DESCRIP ESTAUS (solo MAYOR 110%) ---
-  const may = data.filter(d=>d['DIFERENCIAS']==='MAYOR 110%');
-  const estaus = [...new Set(may.map(d=>d['DESCRIP ESTAUS']||'(s/d)'))].sort();
-  const map2 = {};
-  may.forEach(d=>{
-    const div = d['DIVISION']||'(s/d)';
-    const es  = d['DESCRIP ESTAUS']||'(s/d)';
-    if(!map2[div]){ map2[div]={}; estaus.forEach(e=>map2[div][e]=0); map2[div]._total=0; }
-    map2[div][es]=(map2[div][es]||0)+1;
-    map2[div]._total++;
+  let html = '';
+  let grand = {total:0,may:0,men:0};
+  const zonas = Object.keys(tree).sort();
+  let zIdx=0;
+  zonas.forEach(z=>{
+    zIdx++;
+    let zTot={total:0,may:0,men:0};
+    const subs = Object.keys(tree[z]).sort();
+    let subRows = '';
+    let sIdx=0;
+    subs.forEach(s=>{
+      sIdx++;
+      let sTot={total:0,may:0,men:0};
+      const divs = Object.keys(tree[z][s]).sort();
+      let detRows='';
+      divs.forEach(dv=>{
+        const v = tree[z][s][dv];
+        sTot.total+=v.total; sTot.may+=v.may; sTot.men+=v.men;
+        const pmay = v.total>0?(v.may/v.total*100):0;
+        const pmen = v.total>0?(v.men/v.total*100):0;
+        detRows += `<tr class="detalle-fila grp-z${zIdx} grp-z${zIdx}-s${sIdx}">
+          <td class="txt-left">${dv}</td>
+          <td class="cell-num">${v.total.toLocaleString('es-MX')}</td>
+          <td class="cell-danger">${v.may.toLocaleString('es-MX')}</td>
+          <td class="cell-danger">${pmay.toFixed(1)}% <span class="pct-bar"><i class="danger" style="width:${Math.min(100,pmay)}%"></i></span></td>
+          <td class="cell-ok">${v.men.toLocaleString('es-MX')}</td>
+          <td class="cell-ok">${pmen.toFixed(1)}% <span class="pct-bar"><i class="ok" style="width:${Math.min(100,pmen)}%"></i></span></td>
+        </tr>`;
+      });
+      zTot.total+=sTot.total; zTot.may+=sTot.may; zTot.men+=sTot.men;
+      const psmay = sTot.total>0?(sTot.may/sTot.total*100):0;
+      const psmen = sTot.total>0?(sTot.men/sTot.total*100):0;
+      subRows += `<tr class="subtotal-subzona grp-z${zIdx} grp-z${zIdx}-s${sIdx}" onclick="toggleSub(event,${zIdx},${sIdx})">
+        <td class="txt-left">SUBZONA: ${s}</td>
+        <td>${sTot.total.toLocaleString('es-MX')}</td>
+        <td>${sTot.may.toLocaleString('es-MX')}</td>
+        <td>${psmay.toFixed(1)}%</td>
+        <td>${sTot.men.toLocaleString('es-MX')}</td>
+        <td>${psmen.toFixed(1)}%</td>
+      </tr>` + detRows;
+    });
+    grand.total+=zTot.total; grand.may+=zTot.may; grand.men+=zTot.men;
+    const pzmay = zTot.total>0?(zTot.may/zTot.total*100):0;
+    const pzmen = zTot.total>0?(zTot.men/zTot.total*100):0;
+    html += `<tr class="subtotal-zona" onclick="toggleZona(${zIdx})">
+      <td class="txt-left">ZONA: ${z}</td>
+      <td>${zTot.total.toLocaleString('es-MX')}</td>
+      <td>${zTot.may.toLocaleString('es-MX')}</td>
+      <td>${pzmay.toFixed(1)}%</td>
+      <td>${zTot.men.toLocaleString('es-MX')}</td>
+      <td>${pzmen.toFixed(1)}%</td>
+    </tr>` + subRows;
   });
-  const divs = Object.keys(map2).sort((a,b)=>map2[b]._total - map2[a]._total);
-  $('tblDivEstausHead').innerHTML = '<tr><th>DIVISION</th>' +
-    estaus.map(e=>`<th>${e}</th>`).join('') +
-    '<th>TOTAL</th></tr>';
-  $('tblDivEstausBody').innerHTML = divs.map(div=>{
-    return `<tr>
-      <td class="txt-left">${div}</td>
-      ${estaus.map(e=>`<td class="cell-danger">${(map2[div][e]||0).toLocaleString('es-MX')}</td>`).join('')}
-      <td class="cell-num">${map2[div]._total.toLocaleString('es-MX')}</td>
-    </tr>`;
-  }).join('') +
-  // Fila total
-  `<tr style="background:#333F48;color:#fff;font-weight:800">
-    <td class="txt-left" style="background:#333F48;color:#fff">TOTAL</td>
-    ${estaus.map(e=>{
-      const s=divs.reduce((a,d)=>a+(map2[d][e]||0),0);
-      return `<td style="background:#333F48;color:#fff">${s.toLocaleString('es-MX')}</td>`;
-    }).join('')}
-    <td style="background:#333F48;color:#fff">${may.length.toLocaleString('es-MX')}</td>
+  // GRAN TOTAL
+  const pgmay = grand.total>0?(grand.may/grand.total*100):0;
+  const pgmen = grand.total>0?(grand.men/grand.total*100):0;
+  html += `<tr class="subtotal-grand">
+    <td class="txt-left">TOTAL GENERAL</td>
+    <td>${grand.total.toLocaleString('es-MX')}</td>
+    <td>${grand.may.toLocaleString('es-MX')}</td>
+    <td>${pgmay.toFixed(1)}%</td>
+    <td>${grand.men.toLocaleString('es-MX')}</td>
+    <td>${pgmen.toFixed(1)}%</td>
   </tr>`;
+  tbody1.innerHTML = html;
 
-  // --- Tabla 3: Ordenes MAYOR 110% por División ---
+  // --- Tabla 2 (ahora derecha): División x DESCRIP ESTAUS en formato LONG ---
+  const may = data.filter(d=>d['DIFERENCIAS']==='MAYOR 110%');
+  const longMap = {}; // [div][estaus] = count
+  may.forEach(d=>{
+    const dv = d['DIVISION']||'(s/d)';
+    const es = d['DESCRIP ESTAUS']||'(s/d)';
+    if(!longMap[dv]) longMap[dv] = {};
+    longMap[dv][es] = (longMap[dv][es]||0)+1;
+  });
+  // Ordenar divisiones por suma desc
+  const divsOrd = Object.keys(longMap).sort((a,b)=>{
+    const sa = Object.values(longMap[a]).reduce((x,y)=>x+y,0);
+    const sb = Object.values(longMap[b]).reduce((x,y)=>x+y,0);
+    return sb-sa;
+  });
+  let html2 = '';
+  divsOrd.forEach(dv=>{
+    const estausOrd = Object.keys(longMap[dv]).sort();
+    estausOrd.forEach(es=>{
+      html2 += `<tr>
+        <td class="txt-left">${dv}</td>
+        <td class="txt-left">${es}</td>
+        <td class="cell-danger">${longMap[dv][es].toLocaleString('es-MX')}</td>
+      </tr>`;
+    });
+  });
+  document.querySelector('#tblDivEstaus tbody').innerHTML = html2;
+
+  // --- Tabla 3 (ahora izquierda): Ordenes MAYOR 110% por División (sin columna %) ---
   const map3={};
   may.forEach(d=>{
     const k=d['DIVISION']||'(s/d)';
@@ -801,22 +986,17 @@ function renderVista2(){
   const arr3 = Object.entries(map3).sort((a,b)=>b[1]-a[1]);
   const tot3 = may.length;
   document.querySelector('#tblDiv tbody').innerHTML = arr3.map(([k,v])=>{
-    const p = tot3>0 ? (v/tot3*100) : 0;
     return `<tr>
       <td class="txt-left">${k}</td>
       <td class="cell-danger">${v.toLocaleString('es-MX')}</td>
-      <td>${p.toFixed(1)}% <span class="pct-bar"><i class="danger" style="width:${Math.min(100,p)}%"></i></span></td>
     </tr>`;
   }).join('') +
-  `<tr style="background:#333F48;color:#fff;font-weight:800">
-    <td class="txt-left" style="background:#333F48;color:#fff">TOTAL</td>
-    <td style="background:#333F48;color:#fff">${tot3.toLocaleString('es-MX')}</td>
-    <td style="background:#333F48;color:#fff">100.0%</td>
+  `<tr class="subtotal-grand">
+    <td class="txt-left">TOTAL</td>
+    <td>${tot3.toLocaleString('es-MX')}</td>
   </tr>`;
 
-  // --- Tabla 4: TIPO MTTO unidades y % ---
-  // "Unidades" = registros (cada fila es una orden de una unidad por tipo mtto). Pero más útil: unidades distintas.
-  // Interpretación: cantidad de unidades (registros) y % de cada estado dentro de su tipo mtto.
+  // --- Tabla 4: TIPO MTTO ---
   const map4={};
   data.forEach(d=>{
     const k=d['TIPO MTTO']||'(s/d)';
@@ -841,19 +1021,59 @@ function renderVista2(){
   }).join('');
 }
 
+// ── Toggles colapso de zona/subzona ──────────────────────────────────
+function toggleZona(zIdx){
+  const zonaRows = document.querySelectorAll('#tblZonaSub tbody tr.subtotal-zona');
+  const zonaTr = zonaRows[zIdx-1];
+  if(!zonaTr) return;
+  const collapse = !zonaTr.classList.contains('collapsed');
+  zonaTr.classList.toggle('collapsed', collapse);
+  if(collapse){
+    // Ocultar todo lo de la zona
+    document.querySelectorAll(`#tblZonaSub tbody tr.grp-z${zIdx}`).forEach(r=>{
+      r.classList.add('hidden');
+    });
+  } else {
+    // Mostrar subzonas; los detalles solo si su subzona NO está colapsada
+    document.querySelectorAll(`#tblZonaSub tbody tr.subtotal-subzona.grp-z${zIdx}`).forEach(r=>{
+      r.classList.remove('hidden');
+    });
+    document.querySelectorAll(`#tblZonaSub tbody tr.detalle-fila.grp-z${zIdx}`).forEach(r=>{
+      // Buscar la subzona padre por la clase grp-zX-sY
+      const subCls = [...r.classList].find(c=>/^grp-z\d+-s\d+$/.test(c));
+      if(subCls){
+        const subTr = document.querySelector(`#tblZonaSub tbody tr.subtotal-subzona.${subCls}`);
+        if(subTr && !subTr.classList.contains('collapsed')) r.classList.remove('hidden');
+      }
+    });
+  }
+}
+function toggleSub(ev, zIdx, sIdx){
+  if(ev) ev.stopPropagation();
+  const subRows = document.querySelectorAll(`#tblZonaSub tbody tr.subtotal-subzona.grp-z${zIdx}`);
+  const subTr = subRows[sIdx-1];
+  if(!subTr) return;
+  const collapse = !subTr.classList.contains('collapsed');
+  subTr.classList.toggle('collapsed', collapse);
+  document.querySelectorAll(`#tblZonaSub tbody tr.detalle-fila.grp-z${zIdx}-s${sIdx}`).forEach(r=>{
+    r.classList.toggle('hidden', collapse);
+  });
+}
+
 // ── Descarga genérica de tablas a Excel ──────────────────────────────
 function descargarTabla(tblId, filename){
   const tbl = $(tblId);
   if(!tbl) return;
-  // Sacamos texto plano de cada celda (sin HTML extra de las pct-bar)
   const rows = [];
   tbl.querySelectorAll('tr').forEach(tr=>{
     const cells = [];
     tr.querySelectorAll('th,td').forEach(td=>{
-      // tomar solo el primer nodo de texto, quitando las pct-bar
       const clone = td.cloneNode(true);
       clone.querySelectorAll('.pct-bar').forEach(n=>n.remove());
-      cells.push(clone.textContent.trim());
+      // Quitar prefijos ▼/▶ del label de subtotales
+      let txt = clone.textContent.trim();
+      txt = txt.replace(/^[▶▼]\s*/,'');
+      cells.push(txt);
     });
     rows.push(cells);
   });
