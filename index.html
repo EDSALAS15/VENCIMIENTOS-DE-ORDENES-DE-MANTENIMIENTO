@@ -77,6 +77,13 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .tbl tbody tr.subtotal-subzona td:first-child::before{content:'▼ ';font-size:9px;padding-left:14px}
 .tbl tbody tr.subtotal-subzona.collapsed td:first-child::before{content:'▶ ';padding-left:14px}
 .tbl tbody tr.detalle-fila td:first-child{padding-left:34px}
+.tbl tbody tr.subtotal-grupo td{font-weight:800;cursor:pointer;color:#fff}
+.tbl tbody tr.subtotal-grupo.verde  td{background:#00AF50}
+.tbl tbody tr.subtotal-grupo.amarillo td{background:#FFC000;color:#333F48}
+.tbl tbody tr.subtotal-grupo.rojo   td{background:#C00000}
+.tbl tbody tr.subtotal-grupo td:first-child::before{content:'▼ ';font-size:9px}
+.tbl tbody tr.subtotal-grupo.collapsed td:first-child::before{content:'▶ '}
+.tbl tbody tr.detalle-grupo td:first-child{padding-left:24px}
 .tbl tbody tr.subtotal-grand td{background:var(--side-bg);color:#fff;font-weight:800;font-size:11px}
 .tbl tbody tr.hidden{display:none}
 .vista{display:none}
@@ -352,6 +359,8 @@ function setupEventDelegation(){
     if(trZ){ toggleZona(trZ); return; }
     const trS = t.closest('tr.subtotal-subzona');
     if(trS){ toggleSub(trS); return; }
+    const trG = t.closest('tr.subtotal-grupo');
+    if(trG){ toggleGrupo(trG); return; }
 
     // Toggle multiselect dropdown
     if(t.classList.contains('multiselect')){
@@ -605,12 +614,27 @@ function renderVista1(){
 
   renderChart(GRUPOS_ORDEN, valores, colores, yMax);
 
-  // Tabla resumen por grupos
+  // Tabla resumen por grupos con subtotales por color (Verdes / Amarillo / Rojos)
   const totG = valores.reduce((a,b)=>a+b, 0);
-  let html = '';
+  // Clasificar grupos por color
+  const cats = [
+    {key:'verde',    label:'VERDES (al corriente)',     hex:'#00AF50', grupos:[]},
+    {key:'amarillo', label:'AMARILLO (advertencia)',    hex:'#FFC000', grupos:[]},
+    {key:'rojo',     label:'ROJOS (vencidos)',          hex:'#C00000', grupos:[]}
+  ];
   for(let i=0;i<GRUPOS_ORDEN.length;i++){
-    const g = GRUPOS_ORDEN[i], v = valores[i];
-    html += `<tr><td class="txt-left" style="border-left:4px solid ${colores[i]}">${g}</td><td class="cell-num">${fmt(v)}</td><td>${pct(v,totG).toFixed(1)}%</td></tr>`;
+    const c = colores[i];
+    const cat = c==='#00AF50'?cats[0] : c==='#FFC000'?cats[1] : cats[2];
+    cat.grupos.push({nombre:GRUPOS_ORDEN[i], valor:valores[i], color:c});
+  }
+  let html = '';
+  for(const cat of cats){
+    if(cat.grupos.length===0) continue;
+    const subTot = cat.grupos.reduce((a,g)=>a+g.valor, 0);
+    html += `<tr class="subtotal-grupo ${cat.key}" data-cat="${cat.key}"><td class="txt-left">${cat.label}</td><td>${fmt(subTot)}</td><td>${pct(subTot,totG).toFixed(1)}%</td></tr>`;
+    for(const g of cat.grupos){
+      html += `<tr class="detalle-grupo grp-${cat.key}"><td class="txt-left" style="border-left:4px solid ${g.color}">${g.nombre}</td><td class="cell-num">${fmt(g.valor)}</td><td>${pct(g.valor,totG).toFixed(1)}%</td></tr>`;
+    }
   }
   html += `<tr class="subtotal-grand"><td class="txt-left" style="border-left:4px solid #333F48">TOTAL</td><td>${fmt(totG)}</td><td>100.0%</td></tr>`;
   $('tblGrupos').tBodies[0].innerHTML = html;
@@ -827,6 +851,14 @@ function toggleSub(subTr){
   const collapse = !subTr.classList.contains('collapsed');
   subTr.classList.toggle('collapsed', collapse);
   subTr.parentNode.querySelectorAll(`tr.detalle-fila.${subCls}`).forEach(r=>r.classList.toggle('hidden', collapse));
+}
+
+function toggleGrupo(grupoTr){
+  const cat = grupoTr.dataset.cat;
+  if(!cat) return;
+  const collapse = !grupoTr.classList.contains('collapsed');
+  grupoTr.classList.toggle('collapsed', collapse);
+  grupoTr.parentNode.querySelectorAll(`tr.detalle-grupo.grp-${cat}`).forEach(r=>r.classList.toggle('hidden', collapse));
 }
 
 // ═══════════════════════════════════════════════════════════
