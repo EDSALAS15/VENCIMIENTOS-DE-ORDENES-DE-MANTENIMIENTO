@@ -150,7 +150,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 
           <div class="tabla-wrap">
             <div class="tabla-toolbar"><span>Resumen de Ordenes por Grupos</span><button class="btn-dl" data-dl="tblGrupos" data-fn="ordenes_por_grupos">&#11015; Descargar Excel</button></div>
-            <div class="tabla-scroll"><table class="tbl" id="tblGrupos"><thead><tr><th>GRUPO</th><th>CANTIDAD DE ORDENES</th><th>% DEL TOTAL</th></tr></thead><tbody></tbody></table></div>
+            <div class="tabla-scroll"><table class="tbl" id="tblGrupos"><thead><tr><th style="border-left:4px solid #333F48">GRUPO</th><th>CANTIDAD DE ORDENES</th><th>% DEL TOTAL</th></tr></thead><tbody></tbody></table></div>
           </div>
 
           <div class="tabla-wrap">
@@ -191,7 +191,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
           <div class="section-title">Unidades y % MAYOR / MENOR 110% por TIPO MTTO</div>
           <div class="tabla-wrap">
             <div class="tabla-toolbar"><span>Tipo de Mantenimiento</span><button class="btn-dl" data-dl="tblTipoMtto" data-fn="tipo_mantenimiento_unidades">&#11015; Descargar Excel</button></div>
-            <div class="tabla-scroll with-vscroll"><table class="tbl" id="tblTipoMtto"><thead><tr><th>TIPO MTTO</th><th>UNIDADES TOTAL</th><th>UNIDADES MAYOR 110%</th><th>% MAYOR 110%</th><th>UNIDADES MENOR 110%</th><th>% MENOR 110%</th></tr></thead><tbody></tbody></table></div>
+            <div class="tabla-scroll"><table class="tbl" id="tblTipoMtto"><thead><tr><th>TIPO MTTO</th><th>UNIDADES TOTAL</th><th>UNIDADES MAYOR 110%</th><th>% MAYOR 110%</th><th>UNIDADES MENOR 110%</th><th>% MENOR 110%</th></tr></thead><tbody></tbody></table></div>
           </div>
         </div>
       </div>
@@ -612,7 +612,7 @@ function renderVista1(){
     const g = GRUPOS_ORDEN[i], v = valores[i];
     html += `<tr><td class="txt-left" style="border-left:4px solid ${colores[i]}">${g}</td><td class="cell-num">${fmt(v)}</td><td>${pct(v,totG).toFixed(1)}%</td></tr>`;
   }
-  html += `<tr class="subtotal-grand"><td class="txt-left">TOTAL</td><td>${fmt(totG)}</td><td>100.0%</td></tr>`;
+  html += `<tr class="subtotal-grand"><td class="txt-left" style="border-left:4px solid #333F48">TOTAL</td><td>${fmt(totG)}</td><td>100.0%</td></tr>`;
   $('tblGrupos').tBodies[0].innerHTML = html;
 
   buildTablaDetalle();
