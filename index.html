@@ -77,10 +77,14 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .tbl tbody tr.subtotal-subzona td:first-child::before{content:'▼ ';font-size:9px;padding-left:14px}
 .tbl tbody tr.subtotal-subzona.collapsed td:first-child::before{content:'▶ ';padding-left:14px}
 .tbl tbody tr.detalle-fila td:first-child{padding-left:34px}
-.tbl tbody tr.subtotal-grupo td{font-weight:800;cursor:pointer;color:#fff}
-.tbl tbody tr.subtotal-grupo.verde  td{background:#00AF50}
-.tbl tbody tr.subtotal-grupo.amarillo td{background:#FFC000;color:#333F48}
-.tbl tbody tr.subtotal-grupo.rojo   td{background:#C00000}
+.tbl tbody tr.subtotal-grupo td{font-weight:800;cursor:pointer}
+.tbl tbody tr.subtotal-grupo td:first-child{border-left-width:4px;border-left-style:solid}
+.tbl tbody tr.subtotal-grupo.verde    td{background:#C6EFCE;color:#0B6623}
+.tbl tbody tr.subtotal-grupo.verde    td:first-child{border-left-color:#00AF50}
+.tbl tbody tr.subtotal-grupo.amarillo td{background:#FFEB9C;color:#9C5700}
+.tbl tbody tr.subtotal-grupo.amarillo td:first-child{border-left-color:#FFC000}
+.tbl tbody tr.subtotal-grupo.rojo     td{background:#FFC7CE;color:#9C0006}
+.tbl tbody tr.subtotal-grupo.rojo     td:first-child{border-left-color:#C00000}
 .tbl tbody tr.subtotal-grupo td:first-child::before{content:'▼ ';font-size:9px}
 .tbl tbody tr.subtotal-grupo.collapsed td:first-child::before{content:'▶ '}
 .tbl tbody tr.detalle-grupo td:first-child{padding-left:24px}
