@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 <style>
-:root{--rojo:#C10230;--gris:#F4F4F4;--azul:#0071C1;--verde:#00B050;--side-w:220px;--side-bg:#333F48;--side-grp:#263038;--side-txt:#ccc;--rojo-h:#E4002B;--gris-d:#858C91;--gris-l:#EDF0F3}
+:root{--rojo:#E4002B;--gris:#F4F4F4;--azul:#0071C1;--verde:#00B050;--side-w:220px;--side-bg:#333F48;--side-grp:#263038;--side-txt:#ccc;--rojo-h:#E4002B;--gris-d:#858C91;--gris-l:#EDF0F3}
 *{box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;display:flex;flex-direction:column;min-height:100vh}
 .header-bar{display:flex;align-items:stretch;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
@@ -46,22 +46,22 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .kpi-card{flex:1;background:#f9f9f9;border:1px solid #e8e8e8;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06);min-height:90px;text-align:center;min-width:140px}
 .kpi-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#999;width:100%}
 .kpi-value{font-size:22px;font-weight:800;color:var(--side-bg);line-height:1;flex:1;display:flex;align-items:center;justify-content:center;width:100%}
-.kpi-value.danger{color:#C00000}
-.kpi-value.ok{color:#00AF50}
+.kpi-value.danger{color:#FF0000}
+.kpi-value.ok{color:#00B050}
 .kpi-value.small{font-size:16px}
 .kpi-sub{font-size:10px;color:#888;width:100%}
 .chart-title{font-size:13px;font-weight:700;color:#333;margin-bottom:6px;padding-left:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .ct-dash,.ct-zone{font-size:11px;font-weight:600;color:#fff;padding:2px 8px;border-radius:20px}
 .ct-dash{background:var(--side-bg)}
-.ct-zone{background:var(--rojo-h)}
-.ct-info{font-size:11px;color:#888;font-weight:500}
+.ct-zone{background:#E4002B}
+.ct-info{font-size:11px;color:#4A4847;font-weight:500}
 .chart-container{height:420px;position:relative;margin-top:10px}
 #uploadArea{text-align:center;padding:40px;border:2px dashed var(--rojo-h);border-radius:8px}
 #uploadArea p{color:#666;font-size:13px}
 .tabla-wrap{margin-top:20px;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
 .tabla-toolbar{display:flex;align-items:center;justify-content:space-between;background:var(--side-bg);color:#fff;padding:8px 14px;font-size:11px;font-weight:700}
-.btn-dl{background:#00882B;color:#fff;border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700}
-.btn-dl:hover{background:#006820}
+.btn-dl{background:#227447;color:#fff;border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700}
+.btn-dl:hover{background:#1A5D38}
 .tabla-scroll{overflow-x:auto}
 .tabla-scroll.with-vscroll{max-height:420px;overflow-y:auto}
 .tbl{width:100%;border-collapse:collapse;font-size:11px}
@@ -80,11 +80,11 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 .tbl tbody tr.subtotal-grupo td{font-weight:800;cursor:pointer}
 .tbl tbody tr.subtotal-grupo td:first-child{border-left-width:4px;border-left-style:solid}
 .tbl tbody tr.subtotal-grupo.verde    td{background:#C6EFCE;color:#0B6623}
-.tbl tbody tr.subtotal-grupo.verde    td:first-child{border-left-color:#00AF50}
+.tbl tbody tr.subtotal-grupo.verde    td:first-child{border-left-color:#00B050}
 .tbl tbody tr.subtotal-grupo.amarillo td{background:#FFEB9C;color:#9C5700}
 .tbl tbody tr.subtotal-grupo.amarillo td:first-child{border-left-color:#FFC000}
 .tbl tbody tr.subtotal-grupo.rojo     td{background:#FFC7CE;color:#9C0006}
-.tbl tbody tr.subtotal-grupo.rojo     td:first-child{border-left-color:#C00000}
+.tbl tbody tr.subtotal-grupo.rojo     td:first-child{border-left-color:#FF0000}
 .tbl tbody tr.subtotal-grupo td:first-child::before{content:'▼ ';font-size:9px}
 .tbl tbody tr.subtotal-grupo.collapsed td:first-child::before{content:'▶ '}
 .tbl tbody tr.detalle-grupo td:first-child{padding-left:24px}
@@ -97,11 +97,11 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--gris);margin:0;di
 @media (max-width:980px){.grid-2{grid-template-columns:1fr}}
 .pct-bar{display:inline-block;height:6px;background:#eee;border-radius:3px;width:60px;vertical-align:middle;margin-left:4px;position:relative;overflow:hidden}
 .pct-bar i{position:absolute;left:0;top:0;height:100%}
-.pct-bar i.danger{background:#C00000}
-.pct-bar i.ok{background:#00AF50}
+.pct-bar i.danger{background:#FF0000}
+.pct-bar i.ok{background:#00B050}
 .cell-num{font-weight:700;color:var(--side-bg)}
-.cell-danger{color:#C00000;font-weight:700}
-.cell-ok{color:#00AF50;font-weight:700}
+.cell-danger{color:#FF0000;font-weight:700}
+.cell-ok{color:#00B050;font-weight:700}
 .cell-warn{color:#FFC000;font-weight:700}
 </style>
 </head>
@@ -239,7 +239,7 @@ const FILTER_DEFS = [
 const FILTER_FIELDS = FILTER_DEFS.map(d=>d[0]);
 const ESTATUS_EXCLUIR = ['BAJA TALLER','INACTIVA','PROPUESTA BAJA'];
 const GRUPOS_ORDEN = ['0%-20%','20%-40%','40%-60%','60%-80%','80%-100%','100%-110%','110%-130%','130%-150%','150%-170%','170%-190%','190%-210%','210% o Mas'];
-const GRUPOS_COLOR = {'0%-20%':'#00AF50','20%-40%':'#00AF50','40%-60%':'#00AF50','60%-80%':'#00AF50','80%-100%':'#00AF50','100%-110%':'#FFC000','110%-130%':'#C00000','130%-150%':'#C00000','150%-170%':'#C00000','170%-190%':'#C00000','190%-210%':'#C00000','210% o Mas':'#C00000'};
+const GRUPOS_COLOR = {'0%-20%':'#00B050','20%-40%':'#00B050','40%-60%':'#00B050','60%-80%':'#00B050','80%-100%':'#00B050','100%-110%':'#FFC000','110%-130%':'#FF0000','130%-150%':'#FF0000','150%-170%':'#FF0000','170%-190%':'#FF0000','190%-210%':'#FF0000','210% o Mas':'#FF0000'};
 
 // ═══════════════════════════════════════════════════════════
 //  ESTADO Y CACHÉS
@@ -622,13 +622,13 @@ function renderVista1(){
   const totG = valores.reduce((a,b)=>a+b, 0);
   // Clasificar grupos por color
   const cats = [
-    {key:'verde',    label:'VERDES (al corriente)',     hex:'#00AF50', grupos:[]},
+    {key:'verde',    label:'VERDES (al corriente)',     hex:'#00B050', grupos:[]},
     {key:'amarillo', label:'AMARILLO (advertencia)',    hex:'#FFC000', grupos:[]},
-    {key:'rojo',     label:'ROJOS (vencidos)',          hex:'#C00000', grupos:[]}
+    {key:'rojo',     label:'ROJOS (vencidos)',          hex:'#FF0000', grupos:[]}
   ];
   for(let i=0;i<GRUPOS_ORDEN.length;i++){
     const c = colores[i];
-    const cat = c==='#00AF50'?cats[0] : c==='#FFC000'?cats[1] : cats[2];
+    const cat = c==='#00B050'?cats[0] : c==='#FFC000'?cats[1] : cats[2];
     cat.grupos.push({nombre:GRUPOS_ORDEN[i], valor:valores[i], color:c});
   }
   let html = '';
